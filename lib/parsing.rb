@@ -24,9 +24,9 @@ class RecipeParsing
   end
 
   def scrape_recipe_names(url)
-    html_doc = Nokogiri::HTML(File.open(url).read, nil, 'utf-8')
+    html_doc = Nokogiri::HTML(File.open(url), nil, 'utf-8')
     recipes_names = []
-    html_doc.search('.m_titre_resultat a').each { |recipe| recipes_names << recipe.text }
+    html_doc.search('.m_titre_resultat > a').each { |recipe| recipes_names << recipe.attribute("title").text }
     recipes_names
   end
 
